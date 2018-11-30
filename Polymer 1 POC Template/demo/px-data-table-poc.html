@@ -1,0 +1,63 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/px-data-table/px-data-table.html">
+<link rel="import" href="../bower_components/px-modal/px-modal.html"/>
+
+
+<dom-module id="px-data-table-demo">
+  <template>
+    <style>
+      :host {
+        font-family: sans-serif;
+      };
+    </style>
+    <h3>PX DATA TABLE</h3>
+    <px-data-table id="mytable" on-px-cell-click="onCellClick"
+    table-data="{{data}}">
+      <px-data-table-column
+        name='first'>
+      </px-data-table-column>
+      <px-data-table-column
+        name='last'>
+      </px-data-table-column>
+      <px-data-table-column
+        name='email'>
+      </px-data-table-column>
+    </px-data-table>
+
+    <px-modal
+      header-text="Cell Value"
+      body-text="The value of the cell: [[cellValue]]"
+      accept-text="Ok"
+      hide-pagination-control="[[hidePagination]]"
+      open-trigger="[[trigger]]">
+    </px-modal>
+  </template>
+  <script>
+    Polymer({
+      is: "px-data-table-demo",
+      properties: {
+        data: {
+              type: Array,
+              value: function() {
+                return [
+                  {"first":"Valentine","last":"Meyer","email":"valentinemeyer@scentric.com"},
+                  {"first":"Silva","last":"Alexander","email":"silvaalexander@gmail.com"},
+                  {"first":"Hopkins","last":"Wong","email":"hopkinswong@hotmail.com"},
+                  {"first":"Joe","last":"Sherman","email":"joejoe@yahoo.com"},
+                  {"first":"Jane","last":"Bartlett","email":"jane@scentric.com"}
+                ];
+              }
+            }
+        },
+        onCellClick: function(cellObj, detailObj) {
+          let colName = detailObj.column.label.toLowerCase();
+          this.cellValue = detailObj.row.row[colName].value;
+          this.trigger = document.getElementById("mytable");
+        },
+        trigger:{
+          type: HTMLElement,
+          notify: true
+        }
+    });
+  </script>
+</dom-module>
