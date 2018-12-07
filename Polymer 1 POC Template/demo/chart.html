@@ -1,8 +1,7 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/px-data-table/px-data-table.html">
 <link rel="import" href="../bower_components/px-modal/px-modal.html"/>
-<!-- <link rel="import" href="../bower_components/px-data-table/px-data-table-highlight.html"/>
-<link rel="import" href="../bower_components/px-data-table/px-example-highlight.html"/> -->
+
 
 <dom-module id="chart-demo">
   <template>
@@ -34,10 +33,11 @@
     </style>
     <h3>Downloadable Content</h3>
     <px-data-table id="chart-table" on-px-cell-click="onCellClick"
-    table-data="{{data}}">
+    table-data="{{data}}" selectable >
+    <!-- <px-data-table-column></px-data-table-column> -->
       <px-data-table-column
         name='first'>
-        <px-data-table-highlight highlight-type="cell" highlight-value="high" highlight-method="isLongString"
+        <px-data-table-highlight highlight-type="cell" highlight-value="high" highlight-method="numbericHighlight"
          import="../bower_components/px-data-table/px-example-highlight.html"></px-data-table-highlight>
         </px-data-table-highlight>
       </px-data-table-column>
@@ -48,7 +48,6 @@
         name='email'>
       </px-data-table-column>
     </px-data-table>
-
     <px-modal
       header-text="Cell Value"
       body-text="The value of the cell: [[cellValue]]"
@@ -113,16 +112,8 @@
         detached: function() {
           // debugger;
         }
-        // test: function(a,b,c){
-        //   debugger
-        // },
-        // isLongString: function(){
-        //   debugger;
-        // }
+
     });
-    // function test(a,b,c){
-    //   debugger
-    // }
     function download() {
       this.elementToPrint = document.getElementById("chart-table");
       if(!this.fileType) {
@@ -157,23 +148,5 @@
           }
         });
     }
-
-    // document.addEventListener('WebComponentsReady', function() {
-       
-    // });
-    // document.addEventListener('px-data-table-highlight-loaded', function() {
-    //   setTimeout(() => {
-    //     if (document.readyState == 'complete') {
-    //     var elements = document.getElementById('chart-table').getElementsByClassName('aha-first-td');
-    //     for(let i = 0; i< elements.length; i++){
-    //       if(!isNaN(Number(elements[i].innerText))){
-    //         elements[i].classList.add("fill-color-number");
-    //       }
-    //     }
-    //   }
-    // }, 3000);
-      
-    // });
-    
   </script>
 </dom-module>
